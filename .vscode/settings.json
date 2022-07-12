@@ -1,0 +1,22 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "/home/jean/.config/Code/User/globalStorage/redhat.vscode-camelk/java-dependencies-3.16.0/dependencies/*.jar"
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "Estoque",
+      "database": "Estoque",
+      "username": "root",
+      "password": "root"
+    }
+  ]
+}
