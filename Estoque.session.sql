@@ -39,6 +39,8 @@ CREATE TABLE Historico (
   id_produto INTEGER NOT NULL,
   id_processo INTEGER NOT NULL,
   id_usuario INTEGER NOT NULL,
+  data_registro DATE NOT NULL,
+  quantidade INTEGER NULL,
 
   FOREIGN KEY (id_produto)
   REFERENCES Produtos(id_produto),
@@ -49,3 +51,10 @@ CREATE TABLE Historico (
   FOREIGN KEY (id_usuario)
   REFERENCES Usuarios(id_usuario)
 );
+
+INSERT INTO Produtos (nome_produto, descricao_produto, quantidade_produto) VALUES ("Arroz", "A1", 10);
+INSERT INTO Processos (nome_processo) VALUES ("cadastrar");
+INSERT INTO Permissoes (nome_permissao, id_processo) VALUES ("admin", 1);
+INSERT INTO Usuarios (nome_usuario, id_permissao) VALUES ("Jean", 1);
+
+INSERT INTO Historico (id_produto, id_processo, id_usuario, data_registro) VALUES (1, 1, 1, "2022-07-14");
