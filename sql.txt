@@ -8,44 +8,129 @@ CREATE TABLE Produtos (
   id_produto INTEGER AUTO_INCREMENT PRIMARY KEY,
   nome_produto VARCHAR(25) NOT NULL,
   descricao_produto VARCHAR(100) NOT NULL,
-  quantidade_produto INTEGER NOT NULL
-);
-
-CREATE TABLE Processos (
-  id_processo INTEGER AUTO_INCREMENT PRIMARY KEY,
-  nome_processo VARCHAR(10)
+  quantidade_produto INTEGER NOT NULL,
+  valor_produto FLOAT NOT NULL,
+  ativo INTEGER NULL
 );
 
 CREATE TABLE Permissoes (
   id_permissao INTEGER AUTO_INCREMENT PRIMARY KEY,
-  nome_permissao VARCHAR(10) NOT NULL,
-  id_processo INTEGER NOT NULL,
+  nome_permissao VARCHAR(10) NOT NULL
+);
 
+CREATE TABLE Processos (
+  id_processo INTEGER AUTO_INCREMENT PRIMARY KEY,
+  nome_processo VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Permissoes_Processos (
+	id_permissao INTEGER NOT NULL,
+	id_processo INTEGER NOT NULL,
+    
+  FOREIGN KEY (id_permissao)
+  REFERENCES Permissoes (id_permissao),
+  
   FOREIGN KEY (id_processo)
-  REFERENCES Processos(id_processo)
+  REFERENCES Processos (id_processo),
+  
+  PRIMARY KEY (id_permissao, id_processo)
 );
 
 CREATE TABLE Usuarios (
   id_usuario INTEGER AUTO_INCREMENT PRIMARY KEY,
   nome_usuario VARCHAR(20) NOT NULL,
+  usuario VARCHAR(7) NOT NULL,
+  senha VARCHAR(15) NOT NULL,
   id_permissao INTEGER NOT NULL,
 
   FOREIGN KEY (id_permissao)
-  REFERENCES Permissoes(id_permissao)
+  REFERENCES Permissoes (id_permissao)
+);
+
+CREATE TABLE Setores (
+  id_setor INTEGER AUTO_INCREMENT PRIMARY KEY,
+  nome_setor VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE Historico (
   id_historico INTEGER AUTO_INCREMENT PRIMARY KEY,
   id_produto INTEGER NOT NULL,
-  id_processo INTEGER NOT NULL,
   id_usuario INTEGER NOT NULL,
+  id_processo INTEGER NOT NULL,
+  data_registro DATE NOT NULL,
+  quantidade INTEGER NULL,
+  nome_remetente VARCHAR(25) NULL,
+  nome_destinatario VARCHAR(25) NULL,
 
   FOREIGN KEY (id_produto)
-  REFERENCES Produtos(id_produto),
-
-  FOREIGN KEY (id_processo)
-  REFERENCES Processos(id_processo),
+  REFERENCES Produtos (id_produto),
 
   FOREIGN KEY (id_usuario)
-  REFERENCES Usuarios(id_usuario)
+  REFERENCES Usuarios (id_usuario),
+
+  FOREIGN KEY (id_processo)
+  REFERENCES Processos (id_processo)
 );
+
+INSERT INTO Produtos (nome_produto, descricao_produto, quantidade_produto, valor_produto) VALUES ("Arroz", "A1", 10, 10);
+
+INSERT INTO Permissoes (nome_permissao) VALUES ("admin");
+INSERT INTO Permissoes (nome_permissao) VALUES ("user");
+
+INSERT INTO Processos (nome_processo) VALUES ("cadastrado");
+INSERT INTO Processos (nome_processo) VALUES ("editado");
+INSERT INTO Processos (nome_processo) VALUES ("deletado");
+INSERT INTO Processos (nome_processo) VALUES ("enviado");
+
+INSERT INTO Permissoes_Processos (id_permissao, id_processo) VALUES (1, 1);
+INSERT INTO Permissoes_Processos (id_permissao, id_processo) VALUES (1, 2);
+INSERT INTO Permissoes_Processos (id_permissao, id_processo) VALUES (2, 3);
+
+INSERT INTO Usuarios (nome_usuario, usuario, senha, id_permissao) VALUES ("Jean Carlos", "ja33655", "admin", 1);
+INSERT INTO Usuarios (nome_usuario, usuario, senha, id_permissao) VALUES ("Carlos", "ja33656", "t", 2);
+
+INSERT INTO Setores (nome_setor) VALUES ("TI");
+INSERT INTO Setores (nome_setor) VALUES ("PCP");
+
+INSERT INTO Historico (id_produto, id_processo, id_usuario, data_registro) VALUES (1, 1, 1, "2022-07-27");
+
+SELECT 
+	pr.nome_processo 
+FROM 
+	Processos AS pr,
+	Usuarios AS u,
+    Permissoes_Processos AS pp
+WHERE 
+	u.id_usuario = 1 AND
+    pr.id_processo = pp.id_processo AND
+    u.id_permissao = pp.id_permissao
+GROUP BY 
+	pr.nome_processo
+;
+
+SELECT
+	h.id_historico,
+    p.nome_produto,
+    h.quantidade,
+    p.valor_produto,
+    pr.nome_processo,
+    u.usuario,
+    h.nome_remetente,
+    h.nome_destinatario,
+    h.data_registro
+FROM
+	Historico AS h,
+    Produtos AS p,
+    Processos AS pr,
+    Usuarios AS u
+WHERE
+	p.id_produto = h.id_produto AND
+    pr.id_processo = h.id_processo AND
+    u.id_usuario = h.id_usuario
+;
+
+SELECT 
+	id_processo
+FROM 
+	Processos
+WHERE nome_processo LIKE 'deletado';
