@@ -27,6 +27,7 @@ public class Routes extends RouteBuilder {
 		rest()
 				// Login
 				.post("/login")
+				.produces("application/json")
 				.to("direct:login")
 
 				// Trocar senha
@@ -35,10 +36,11 @@ public class Routes extends RouteBuilder {
 
 		from("direct:login")
 				.log("login")
-				.to("sql:SELECT nome_usuario, id_permissao FROM Usuarios WHERE usuario=:#usuario AND senha=:#senha")
+				.to("sql:SELECT u.nome_usuario, p.nome_permissao FROM Usuarios AS u, Permissoes AS p WHERE u.usuario=:#usuario AND u.senha=:#senha AND p.id_permissao = u.id_permissao")
 				.setBody().groovy("body")
 				.marshal().json()
-				.log("${body}");
+				.log("${body}")
+		;
 
 		from("direct:trocarSenha")
 				.log("trocarSenha")
@@ -46,9 +48,11 @@ public class Routes extends RouteBuilder {
 				.choice()
 				.when(body().contains("admin"))
 				.to("sql:UPDATE Usuarios SET senha=:#nova_senha WHERE usuario=:#usuario")
+				.setBody(simple("updated"))
 				.otherwise()
-				.log("Usuário admin inexistente!")
-				.end();
+				.setBody(simple("invalid_admin"))
+				.end()
+		;
 
 		rest()
 				// Cadastrar

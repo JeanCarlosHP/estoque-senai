@@ -14,38 +14,38 @@ export const Container = styled.div`
 `;
 
 export const LoginBox = styled.div`
-  margin-top: 60px;
-  width: 350px;
-  padding: 40px;
+  margin-top: 6rem;
+  width: 35rem;
+  padding: 4rem;
   background-image: linear-gradient(rgba(0, 0, 0, 0.623), rgba(0, 0, 0, 0.849));
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.452);
-  border-radius: 10px;
+  border-radius: 1rem;
 `
 
 export const Title = styled.h1`
   font: normal 21pt Arial;
-  padding-bottom: 1px;
-  border-bottom: 3px solid #55B07D;
+  margin-bottom: 4rem;
+  border-bottom: 0.3rem solid #55B07D;
   color: #55B07D;
 `;
 
 export const Img = styled.img`
   position: absolute;
   top: 1.1rem;
-  height: 5rem;
+  height: 10rem;
 `
 
 export const Form = styled.div``;
 
 export const Label = styled.p`
   font: normal 13pt Arial;
-  margin-top: 2.5rem;
+  margin-top: 3.5rem;
   color: rgba(235, 235, 235, 0.733);
 `
 
 export const Input = styled.input`
   width: 100%;
-  height: 30px;
+  height: 3rem;
   font: normal 11pt Arial;
   color: rgba(255, 255, 255, 0.959);
   border: none;
@@ -70,7 +70,7 @@ export const Button = styled.button`
   color: white;
   background-color: #55B07D;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 
   &:hover {
     color: ${shade(0.1, "#FFFFFF")};
@@ -84,7 +84,7 @@ export const Button = styled.button`
 `;
 
 export const ForgotPass = styled.div`
-  margin-top: 15px;
+  margin-top: 1.5rem;
   text-align: center;
 
   a {

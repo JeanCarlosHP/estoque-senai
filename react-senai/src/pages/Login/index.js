@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import api from "../../services/api";
 
 import { Container, Img, LoginBox, Title, Form, Button, ForgotPass, Label, Input, NaoAutenticado } from "./styles";
@@ -8,6 +10,8 @@ const Login = () => {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
   const [naoAutenticado, setNaoAutenticado] = useState(false)
+
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     api.post("/login", "", {
@@ -20,6 +24,9 @@ const Login = () => {
         setNaoAutenticado(true)
       } else {
         setNaoAutenticado(false)
+        const {nome_usuario, nome_permissao} = res.data[0]
+        console.log(nome_usuario, nome_permissao)
+        navigate("/telaInicial")
       }
     })
   }

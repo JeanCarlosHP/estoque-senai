@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import api from "../../services/api";
 
 import { Container, Img, TrocarSenhaBox, Title, Form, Button, Label, Input, NaoAutenticado } from "./styles";
@@ -11,6 +13,8 @@ const TrocarSenha = () => {
   const [senhaAdmin, setSenhaAdmin] = useState("");
   const [naoAutenticado, setNaoAutenticado] = useState(false)
 
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
     api.put("/trocarSenha", "", {
       headers: {
@@ -20,10 +24,11 @@ const TrocarSenha = () => {
         'senha_admin': senhaAdmin
       }
     }).then((res) => {
-      if (res.data.length === 0) {
+      if (res.data === "invalid_admin") {
         setNaoAutenticado(true)
-      } else {
+      } else if (res.data === "updated") {
         setNaoAutenticado(false)
+        navigate("/login")
       }
     })
   }
