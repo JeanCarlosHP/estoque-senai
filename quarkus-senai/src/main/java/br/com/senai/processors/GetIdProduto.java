@@ -13,6 +13,6 @@ public class GetIdProduto implements Processor {
     Map<String, Integer> body = (Map<String, Integer>) exchange.getIn().getBody();
     int idProduto = body.get("GENERATED_KEY");
 
-    exchange.getIn().setHeader("id_produto", idProduto);
+    exchange.getIn().setHeader("id_produto", Integer.valueOf(idProduto));
   }
 }

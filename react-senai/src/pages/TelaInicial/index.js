@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import api from "../../services/api";
+import { useGlobalContext } from "../../context/context";
 
 import { Header, Logo, TextoLogo, Img, P, Main, Line, Dropdown, MenuLateral, Fundo } from "./styles";
+
+import { Cadastro } from "../../components/Cadastro"
+import ListarProdutos from "../../components/ListarProdutos"
+ 
 import logo from "./img/logo-grupo-malwee.svg"
 import setaSair from "./img/seta-sair.svg"
-import fundo from "./img/fundo-malwee.svg"
 
 const TelaInicial = () => {
   const [atual, setAtual] = useState("")
-
-  const handleSubmit = () => {
-    api.put("/trocarSenha", "", {
-
-    }).then((res) => {
-
-    })
-  }
+  const { nomeUsuario } = useGlobalContext()
 
   const handleSpan = (e) => {
     if (atual !== "") {
@@ -35,7 +32,7 @@ const TelaInicial = () => {
         </Logo>
 
         <div>
-          <P>Victor Ferreira</P>
+          <P>{nomeUsuario}</P>
 
           <Dropdown>
             <img src={setaSair} />
@@ -69,7 +66,9 @@ const TelaInicial = () => {
         </MenuLateral>
 
         <Fundo>
-          <img src={fundo} alt="Fundo Malwee" />
+          {/* <img src={fundo} alt="Fundo Malwee" /> */}
+          {/* <Cadastro /> */}
+          <ListarProdutos />
         </Fundo>
 
       </Main>

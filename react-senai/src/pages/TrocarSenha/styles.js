@@ -55,7 +55,7 @@ export const Input = styled.input`
   border-bottom: 2px solid #55B07D;
 `
 
-export const NaoAutenticado = styled.p`
+export const Erro = styled.p`
   margin-top: 1.5rem;
   font-size: 13pt;
   text-align: center;

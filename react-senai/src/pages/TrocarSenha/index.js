@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../../services/api";
 
-import { Container, Img, TrocarSenhaBox, Title, Form, Button, Label, Input, NaoAutenticado } from "./styles";
+import { Container, Img, TrocarSenhaBox, Title, Form, Button, Label, Input, Erro } from "./styles";
 import logo from "./img/fundo-malwee-logo.png"
 
 const TrocarSenha = () => {
@@ -12,6 +12,7 @@ const TrocarSenha = () => {
   const [usuarioAdmin, setUsuarioAdmin] = useState("");
   const [senhaAdmin, setSenhaAdmin] = useState("");
   const [naoAutenticado, setNaoAutenticado] = useState(false)
+  const [erro, setErro] = useState(false)
 
   const navigate = useNavigate();
 
@@ -26,10 +27,16 @@ const TrocarSenha = () => {
     }).then((res) => {
       if (res.data === "invalid_admin") {
         setNaoAutenticado(true)
+        setErro(false)
       } else if (res.data === "updated") {
         setNaoAutenticado(false)
+        setErro(false)
+
         navigate("/login")
       }
+    }).catch(e => {
+      setErro(true)
+      setNaoAutenticado(false)
     })
   }
 
@@ -53,7 +60,8 @@ const TrocarSenha = () => {
           <Label>Senha Admin</Label>
           <Input type="password" value={senhaAdmin} onChange={e => setSenhaAdmin(e.target.value)} />
 
-          {naoAutenticado && <NaoAutenticado>Usuário e ou senha inválido</NaoAutenticado>}
+          {naoAutenticado && <Erro>Usuário e ou senha inválido</Erro>}
+          {erro && <Erro>Erro interno!</Erro>}
 
           <Button onClick={handleSubmit}>Trocar</Button>
         </Form>

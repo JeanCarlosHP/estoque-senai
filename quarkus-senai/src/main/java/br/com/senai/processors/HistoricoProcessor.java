@@ -27,9 +27,16 @@ public class HistoricoProcessor implements Processor {
   public void process(Exchange exchange) throws Exception {
     
     String processo = (String) exchange.getIn().getHeader("processo");
-    int idProduto = Integer.parseInt((String) exchange.getIn().getHeader("id_produto"));
     int idUsuario = Integer.parseInt((String) exchange.getIn().getHeader("id_usuario"));
+    int idProduto;
     int idProcesso = 0;
+ 
+    if (processo.equals("cadastrado")) {
+      idProduto = (int) exchange.getIn().getHeader("id_produto");
+    } else {
+      idProduto = Integer.parseInt((String) exchange.getIn().getHeader("id_produto"));
+    }
+
 
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     LocalDateTime dataAtual = LocalDateTime.now();
