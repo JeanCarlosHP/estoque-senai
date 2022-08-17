@@ -4,6 +4,7 @@ import api from "../../services/api";
 import DataTable from 'react-data-table-component';
  
 import { Container } from "./styles";
+import Header from "../Header";
  
 const ListarProdutos = () => {
   const [data, setData] = useState({})
@@ -43,28 +44,16 @@ const ListarProdutos = () => {
     },
   ];
  
-  const customStyles = {
-    headCells: {
-      style: {
-        background: '#f1f1f1',
-        fontSize: '1.5rem',
-      },
-    },
-    cells: {
-      style: {
-        background: '#D9D9D9',
-        border: '1px solid #A0A0A0',
-      },
-    },
-  };
- 
- 
   return (
+    <>
     <Container>
+      <Header title="Listar Produtos" />
+
       <div>
-        <DataTable columns={columns} data={data} customStyles={customStyles} />
+        <DataTable columns={columns} data={data} />
       </div>
     </Container>
+    </>
   )
 }
  

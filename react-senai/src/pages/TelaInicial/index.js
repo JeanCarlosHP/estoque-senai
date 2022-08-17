@@ -9,6 +9,7 @@ import ListarProdutos from "../../components/ListarProdutos"
  
 import logo from "./img/logo-grupo-malwee.svg"
 import setaSair from "./img/seta-sair.svg"
+import fundo from "./img/fundo-malwee.svg"
 
 const TelaInicial = () => {
   const [atual, setAtual] = useState("")
@@ -66,9 +67,9 @@ const TelaInicial = () => {
         </MenuLateral>
 
         <Fundo>
-          {/* <img src={fundo} alt="Fundo Malwee" /> */}
-          {/* <Cadastro /> */}
-          <ListarProdutos />
+          {atual === "" && <img src={fundo} alt="Fundo Malwee" />}
+          {atual === "user_cadastro" && <Cadastro />}
+          {atual === "produto_listar" && <ListarProdutos />}
         </Fundo>
 
       </Main>

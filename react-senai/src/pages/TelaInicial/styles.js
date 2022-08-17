@@ -5,7 +5,10 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
 
+  position: fixed;
+
   height: 6.6rem;
+  width: 100%;
   padding-left: 1.1rem;
   padding-right: 1.1rem;
 
@@ -105,6 +108,8 @@ export const MenuLateral = styled.div`
   width: 26.7rem;
   height: 100%;
   background-color: #D9D9D9;
+  position: fixed;
+  margin-top: 6.6rem;
 
   h2 {
     font-size: 2rem;
@@ -148,6 +153,7 @@ export const Fundo = styled.div`
   align-items: center;
   justify-content: center;
   width: calc(100vw - 6.7rem);
+  margin-left: 26.7rem;
 
   img {
     height: 24vh;

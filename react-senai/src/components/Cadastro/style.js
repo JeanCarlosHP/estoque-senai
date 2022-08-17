@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { shade } from "polished";
 
 export const Container = styled.div`
   display: flex;
@@ -6,21 +7,7 @@ export const Container = styled.div`
 
   height: 100%;
   width: 100%;
-`
-
-export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-bottom: 1px solid #000;
-  height: 6.8rem;
-  width: 100%;
-
-  h2 {
-    font-size: 22pt;
-    font-weight: normal;
-  }
+  margin-top: 13.3rem;
 `
 
 export const Main = styled.main`
@@ -28,18 +15,24 @@ export const Main = styled.main`
   gap: 3.2rem;
   flex-direction: column;
   align-items: center;
+
+  width: 71.4rem;
   height: 100%;
   margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
 
   div {
     display: flex;
     gap: 3.2rem;
+
+    width: 100%;
   }
 `
 
 export const Input = styled.input`
   height: 5.2rem;
-  width: ${(props) => props.width + "rem"};
+  width: 100%;
 
   border-radius: 0.4rem;
   border: 1px solid #A0A0A0;
@@ -55,18 +48,19 @@ export const Input = styled.input`
 
 export const Dropdown = styled.div`
   position: relative;
+  width: 17rem !important;
 
   &:after {
     content: '>';
-    font: 17px "Consolas", monospace;
+    font: 1.7rem "Consolas", monospace;
     color: #333;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-    right: 11px;
+    right: 1.1rem;
     
-    top: 15px;
+    top: 1.5rem;
     padding: 0 0 2px;
     border-bottom: 1px solid #999;
     
@@ -75,7 +69,7 @@ export const Dropdown = styled.div`
   }
 
   select {
-    width: 12.7rem;
+    width: 100%;
   
     padding: 1.6rem;
     -webkit-appearance: none;
@@ -85,4 +79,26 @@ export const Dropdown = styled.div`
     border: 1px solid #A0A0A0;
     border-radius: 0.4rem;
   }
+`
+
+export const Button = styled.button`
+  width: 22.2rem;
+  height: 5.2rem;
+  border-radius: 0.8rem;
+  background-color: #D9D9D9;
+  border: none;
+
+  &:hover {
+    background-color: ${shade(0.1, "#D9D9D9")};
+  }
+
+  &:active {
+    background-color: ${shade(0.2, "#D9D9D9")};
+  }
+`
+
+export const Erro = styled.p`
+  font-size: 13pt;
+  text-align: center;
+  color: red;
 `
