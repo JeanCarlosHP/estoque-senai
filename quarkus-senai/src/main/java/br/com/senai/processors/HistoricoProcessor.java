@@ -28,6 +28,7 @@ public class HistoricoProcessor implements Processor {
     
     String processo = (String) exchange.getIn().getHeader("processo");
     int idUsuario = Integer.parseInt((String) exchange.getIn().getHeader("id_usuario"));
+    String quantidade = exchange.getIn().getHeader("quantidade", String.class);
     int idProduto;
     int idProcesso = 0;
  
@@ -61,16 +62,16 @@ public class HistoricoProcessor implements Processor {
     } catch (SQLException e) {
       throw e;
     }
-    System.out.println("t");
 
     try (
         Connection conn = dataSource.getConnection();
         PreparedStatement st = conn.prepareStatement(
-            "INSERT INTO Historico (id_produto, id_processo, id_usuario, data_registro) VALUES (?, ?, ?, ?);");) {
+            "INSERT INTO Historico (id_produto, id_processo, id_usuario, data_registro, quantidade) VALUES (?, ?, ?, ?, ?);");) {
       st.setInt(1, idProduto);
       st.setInt(2, idProcesso);
       st.setInt(3, idUsuario);
       st.setString(4, dataFormatada);
+      st.setString(5, quantidade);
 
       st.execute();
 

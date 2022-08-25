@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/context";
+import { useNavigate } from "react-router-dom"
 
 import api from "../../services/api";
 
@@ -12,8 +11,6 @@ const Login = () => {
   const [senha, setSenha] = useState("");
   const [naoAutenticado, setNaoAutenticado] = useState(false)
   const [erro, setErro] = useState(false)
-
-  const { setNomeUsuario, setPermissao } = useGlobalContext();
 
   const navigate = useNavigate();
 
@@ -31,10 +28,11 @@ const Login = () => {
         setNaoAutenticado(false)
         setErro(false)
 
-        const {nome_usuario, nome_permissao} = res.data[0]
+        const {id_usuario, nome_usuario, nome_permissao} = res.data[0]
 
-        setNomeUsuario(nome_usuario)
-        setPermissao(nome_permissao)
+        localStorage.setItem("idUsuario", id_usuario)
+        localStorage.setItem("nomeUsuario", nome_usuario)
+        localStorage.setItem("permissao", nome_permissao)
 
         navigate("/telaInicial")
       }

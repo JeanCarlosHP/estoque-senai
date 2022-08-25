@@ -1,10 +1,14 @@
 import { createContext, useContext } from 'react'
 
 export const GlobalContext = createContext({
-  nomeUsuario: "",
-  setNomeUsuario: () => {},
-  permissao: "",
-  setPermissao: () => {}
+  modalEditar: "",
+  setModalEditar: () => {},
+  rows: [],
+  setRows: () => {},
+  idEditar: "",
+  setIdEditar: () => {},
+  nomeProdutoEditar: "",
+  setNomeProdutoEditar: () => {}
 })
 
 export const useGlobalContext = () => useContext(GlobalContext)

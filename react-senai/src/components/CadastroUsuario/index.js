@@ -3,9 +3,9 @@ import api from "../../services/api";
 
 import Header from "../Header";
 
-import { Container, Main, Input, Dropdown, Button, Erro } from "./style";
+import { Container, Main, Input, Dropdown, Button, Erro } from "./styles";
 
-export function Cadastro() {
+export function CadastroUsuario() {
   const [nome, setNome] = useState("")
   const [permissao, setPermissao] = useState("user")
   const [usuario, setUsuario] = useState("")
@@ -31,7 +31,7 @@ export function Cadastro() {
 
   return (
     <Container>
-      <Header title="Cadastrar Produto" />
+      <Header title="Cadastrar Usuário" />
 
       <Main>
         <div>

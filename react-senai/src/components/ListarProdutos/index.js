@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
- 
+
 import DataTable from 'react-data-table-component';
- 
+
 import { Container } from "./styles";
 import Header from "../Header";
- 
+import ExpandableComponent from "../ExpandableComponent";
+
 const ListarProdutos = () => {
   const [data, setData] = useState({})
- 
+  const permissao = localStorage.getItem("permissao")
+
   useEffect(() => {
     api.get("/listarProdutos")
       .then((res) => {
         setData(res.data)
       })
   }, [])
- 
+
   const columns = [
     {
       name: 'ID',
@@ -39,22 +41,32 @@ const ListarProdutos = () => {
     },
     {
       name: 'Ativo',
-      selector: row => row.ativo == 0 ? "Não" : "Sim",
+      selector: row => row.ativo === 0 ? "Não" : "Sim",
       sortable: true,
     },
   ];
- 
+
   return (
     <>
-    <Container>
-      <Header title="Listar Produtos" />
+      <Container>
+        <Header title="Listar Produtos" />
 
-      <div>
-        <DataTable columns={columns} data={data} />
-      </div>
-    </Container>
+        <div>
+          {permissao === 'admin' && <DataTable 
+            columns={columns} 
+            data={data} 
+            expandableRows
+            expandableRowsComponent={(row) => <ExpandableComponent row={row}/>}
+          />}
+
+          {permissao === 'user' && <DataTable 
+            columns={columns} 
+            data={data}
+          />}
+        </div>
+      </Container>
     </>
   )
 }
- 
+
 export default ListarProdutos

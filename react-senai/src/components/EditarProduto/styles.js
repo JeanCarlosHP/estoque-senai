@@ -1,33 +1,45 @@
 import styled from "styled-components";
-import { shade } from "polished";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  height: 100%;
+  position: absolute;
   width: 100%;
-  margin-top: 13.3rem;
+  height: 100%;
+  top: 6.6rem;
+
+  background-color: #f1f1f1;
 `
 
-export const Main = styled.main`
+export const Form = styled.form`
   display: flex;
-  gap: 3.2rem;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: 55.5rem;
+  margin: 5rem auto 0 auto;
+
+  & div {
+    display: flex;
+    gap: 3.2rem
+  }
+`
+
+export const Info = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+  margin-top: 5rem;
 
-  width: 71.4rem;
-  height: 100%;
-  margin-top: 10rem;
-  margin-left: auto;
-  margin-right: auto;
-
-  div {
-    display: flex;
-    gap: 3.2rem;
-
-    width: 100%;
+  & p {
+    font-size: 15pt;
   }
+`
+
+export const Label = styled.div`
+  display: inline-block;
+  padding: 1.6rem;
+  border: 1px solid #A0A0A0;
+
+  background-color: #D9D9D9;
 `
 
 export const Input = styled.input`
@@ -40,6 +52,20 @@ export const Input = styled.input`
   placeholder: ${(props) => props.placeholder};
 
   background: #D9D9D9;
+
+  &::placeholder {
+    font-size: 2rem;
+  }
+`
+
+export const Textarea = styled.textarea`
+  border-radius: 0.4rem;
+  border: 1px solid #A0A0A0;
+  padding: 1.5rem 3.2rem;
+  placeholder: ${(props) => props.placeholder};
+
+  background: #D9D9D9;
+  resize: none;
 
   &::placeholder {
     font-size: 2rem;
@@ -79,26 +105,4 @@ export const Dropdown = styled.div`
     border: 1px solid #A0A0A0;
     border-radius: 0.4rem;
   }
-`
-
-export const Button = styled.button`
-  width: 22.2rem;
-  height: 5.2rem;
-  border-radius: 0.8rem;
-  background-color: #D9D9D9;
-  border: none;
-
-  &:hover {
-    background-color: ${shade(0.1, "#D9D9D9")};
-  }
-
-  &:active {
-    background-color: ${shade(0.2, "#D9D9D9")};
-  }
-`
-
-export const Erro = styled.p`
-  font-size: 13pt;
-  text-align: center;
-  color: red;
 `

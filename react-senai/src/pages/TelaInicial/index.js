@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import api from "../../services/api";
 import { useGlobalContext } from "../../context/context";
 
 import { Header, Logo, TextoLogo, Img, P, Main, Line, Dropdown, MenuLateral, Fundo } from "./styles";
 
-import { Cadastro } from "../../components/Cadastro"
+import { CadastroUsuario } from "../../components/CadastroUsuario"
+import ListarUsuarios from "../../components/ListarUsuarios";
+import CadastroProdutos from "../../components/CadastroProdutos"
 import ListarProdutos from "../../components/ListarProdutos"
- 
+import Historico from "../../components/HistoricoUsuario"
+import EditarProduto from "../../components/EditarProduto"
+
 import logo from "./img/logo-grupo-malwee.svg"
 import setaSair from "./img/seta-sair.svg"
 import fundo from "./img/fundo-malwee.svg"
 
 const TelaInicial = () => {
+  const { modalEditar } = useGlobalContext()
   const [atual, setAtual] = useState("")
-  const { nomeUsuario } = useGlobalContext()
+  const permissao = localStorage.getItem("permissao")
 
   const handleSpan = (e) => {
     if (atual !== "") {
@@ -33,12 +37,11 @@ const TelaInicial = () => {
         </Logo>
 
         <div>
-          <P>{nomeUsuario}</P>
+          <P>{localStorage.getItem("nomeUsuario")}</P>
 
           <Dropdown>
-            <img src={setaSair} />
+            <img src={setaSair} alt="seta sair" />
             <div>
-              <a href="/login">Trocar de Usuário</a>
               <a href="/login">Sair</a>
             </div>
           </Dropdown>
@@ -51,7 +54,7 @@ const TelaInicial = () => {
             <h2>Usuários</h2>
             <Line />
             <ul>
-              <li><span id="user_cadastro" onClick={handleSpan}>Cadastrar</span></li>
+              {permissao === 'admin' && <li><span id="user_cadastro" onClick={handleSpan}>Cadastrar</span></li>}
               <li><span id="user_listar" onClick={handleSpan}>Listar</span></li>
             </ul>
           </div>
@@ -68,10 +71,13 @@ const TelaInicial = () => {
 
         <Fundo>
           {atual === "" && <img src={fundo} alt="Fundo Malwee" />}
-          {atual === "user_cadastro" && <Cadastro />}
+          {atual === "user_cadastro" && <CadastroUsuario />}
+          {atual === "user_listar" && <ListarUsuarios />}
+          {atual === "produto_cadastro" && <CadastroProdutos />}
           {atual === "produto_listar" && <ListarProdutos />}
+          {atual === "produto_historico" && <Historico />}
+          {modalEditar && <EditarProduto />}
         </Fundo>
-
       </Main>
     </>
   );

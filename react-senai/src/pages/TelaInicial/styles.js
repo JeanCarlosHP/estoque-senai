@@ -6,6 +6,7 @@ export const Header = styled.header`
   justify-content: space-between;
 
   position: fixed;
+  z-index: 1000;
 
   height: 6.6rem;
   width: 100%;
@@ -74,7 +75,7 @@ export const Dropdown = styled.div`
     background-color: ${shade(0.1, "#f1f1f1")};
   }
 
-  &&:hover {
+  &:hover {
     img {
       background-color: ${shade(0.4, "#f1f1f1")};
     }
@@ -152,6 +153,7 @@ export const Fundo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   width: calc(100vw - 6.7rem);
   margin-left: 26.7rem;
 

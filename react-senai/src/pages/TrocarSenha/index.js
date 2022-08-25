@@ -51,7 +51,7 @@ const TrocarSenha = () => {
           <Label>Usuário</Label>
           <Input type="text" value={usuario} onChange={e => setUsuario(e.target.value)} />
 
-          <Label>Senha Nova</Label>
+          <Label>Nova senha</Label>
           <Input type="password" value={novaSenha} onChange={e => setNovaSenha(e.target.value)} />
 
           <Label>Usuário Admin</Label>
